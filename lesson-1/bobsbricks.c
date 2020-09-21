@@ -26,7 +26,7 @@ int main()
 
     if(brickNum == 0){
         palletNum = 0;
-        printf("Why do you need pallets if there are no bricks?");
+        printf("\nWhy do you need pallets if there are no bricks?\n");
     }
 
     printf("\n bricks needed: %d\n", brickNum);
