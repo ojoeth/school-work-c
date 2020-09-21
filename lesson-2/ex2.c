@@ -19,13 +19,12 @@ int main(){
 
     printf("\nday of week: %c", dayOfWeek);
     // Calculate price for adults and children separately from day of week
-    if (dayOfWeek == "W"){
+    if (dayOfWeek == 'W'){
         childPrice = childTickets * 5.00;
         adultPrice = adultTickets * 8.00;
-    }else if (dayOfWeek == "B" || dayOfWeek == "S"){
+    }else if (dayOfWeek == 'B' || dayOfWeek == 'S'){
         childPrice = childTickets * 7.50;
         adultPrice = adultTickets * 12.00;
     }
-    printf("\ntotal Child price: %f, total Adult price: %f", childPrice, adultPrice);
-
+    printf("\ntotal Child price: %f, total Adult price: %f\n", childPrice, adultPrice);
 }
