@@ -5,7 +5,7 @@ int main(){
     // Set variables
     int childTickets = 0;
     int adultTickets = 0;
-    char dayOfWeek = ' ';
+    char dayOfWeek;
     double totalPrice = 0.00;
     double childPrice = 0.00;
     double adultPrice = 0.00;
