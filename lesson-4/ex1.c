@@ -34,4 +34,6 @@ int main(){
     printf("Which index would you like to check: ");
     fflush(stdin); scanf("%d", &guess);
     printf("Index %d is: %d \n", guess, nums[guess-1] );
+    
+    return 0;
 }
