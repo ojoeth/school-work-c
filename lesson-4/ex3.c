@@ -16,7 +16,7 @@ int main(){
     for(tries = 0; tries < 3; tries++){
         printf(MAGENTA "Take a guess, what is the word?: " COLOUR_RESET);
         fflush(stdin); gets(guess);
-        printf("your guess:  %s\n", guess);
+        printf("your guess: " MAGENTA " %s\n" COLOUR_RESET, guess);
 
         if(strcmp(guess, word) == 0){
             printf("Correct.\n");
