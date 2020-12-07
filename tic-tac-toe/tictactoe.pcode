@@ -1,0 +1,148 @@
+char board = [][] // 2d array board
+char current_player = x
+bool game_over = false
+int boardsize = 0
+string winner = "no_winner"
+int spaceX = 0
+int spaceY = 0
+
+// validate where the player wants to go
+function validate_space(board, spaceX, spaceY)
+    IF ( spaceX == 0 OR spaceY == 0) // if no input
+        return false
+    ELSE IF ( spaceX > boardsize-1 OR spaceY > boardsize-1 )
+        return false
+    ELSE IF ( spaceX < 0 OR spaceY < 0)
+        return false
+    ELSE IF (board[spaceX][spaceY] != '') // if not empty
+        return false
+    ENDIF
+    return true
+endfunction
+
+// show the board
+function display_board(board, boardsize)
+FOR I = 0 TO boardsize-1
+    FOR J = 0 TO boardsize-1
+        OUTPUT("|" + board[I][J] + "|") // output the what is in the current box
+    NEXT J
+    OUTPUT("-"*boardsize) // output as many "-" as the board size to separate the rows
+NEXT I
+endfunction
+
+// check for a winner
+function check_win(board, boardsize)
+    char previous_thing = ''
+    int streak = 1
+
+    // check horizontal 
+    FOR I = 0 TO boardsize-1
+        FOR J = 0 TO boardsize-1
+            IF ( previous_thing == board[I][J] )
+                streak = streak + 1
+                IF streak > 3
+                    return board[I][J]
+                    global game_over = true
+                ENDIF
+            ENDIF
+            previous_thing = board[I][J]
+        NEXT J
+        streak = 1
+        previous_thing = ""
+    NEXT I
+
+    // check vertical
+    FOR I = 0 TO boardsize-1
+        FOR J = 0 TO boardsize-1
+            IF ( previous_thing == board[J][I] )
+                streak = streak + 1
+                IF streak > 3
+                    return board[I][J]
+                    global game_over = true
+                ENDIF
+            ENDIF
+            previous_thing = board[J][I]
+        NEXT J
+        streak = 1
+        previous_thing = ""
+    NEXT I
+
+    // check diagonal positive gradient
+    FOR I = 0 TO boardsize - 1
+        IF ( previous_thing == board[I][I])
+            streak = streak + 1
+            IF streak > 3
+                return board[I][J]
+                global game_over = true
+            ENDIF
+        ENDIF
+        previous_thing = board[I][I]
+    NEXT I
+
+    previous_thing = ""
+
+    // check diagonal negative gradient
+    FOR I = 0 TO boardsize - 1
+        J = boardsize-1
+        IF (previous_thing == board[I][J])
+            streak = streak + 1
+            IF streak > 3
+                return board[I][J]
+                global game_over = true
+            ENDIF
+        ENDIF
+        J = J - 1
+        previous_thing = board[I][J]
+    NEXT I
+
+    // check if board full
+    bool has_spaces = false
+    FOR I = 0 TO boardsize-1
+        FOR J = 0 TO boardsize-1
+            IF (board[I][J] == "") // check if there are spaces
+                has_spaces = true
+            ENDIF
+        NEXT J
+    NEXT I
+
+    IF (has_spaces == false)
+        return "full"
+        global game_over = true
+    ENDIF
+return "no_winner"
+endfunction
+
+DO
+    boardsize = INPUT("How many squares should the board have? (3 for 3x3, 4 for 4x4, etc)") 
+UNTIL(boardsize < 10 AND boardsize >= 3)
+
+
+
+
+WHILE ( game_over == false )
+    
+    OUTPUT(" It is " + current_player + "'s turn to play")
+
+    DO
+        OUTPUT("Please enter the X and Y co-ordinates of where you want to go (EG: 1 and then 2 to select the first row, second column))
+        spaceX = ( INPUT("X co-ordinate") - 1 )
+        spaceY = ( INPUT("Y co-ordinate") - 1 )
+    UNTIL (validate_space(board, spaceX, spaceY) = true)
+
+    display_board(board, boardsize)
+    
+    winner = check_win(board, boardsize)
+
+    IF (winner != "no_winner")
+        IF (winner == "full")
+            OUTPUT("The board is full, there is no winner")
+    ELSE IF (winner == "nowinner)
+        // switch to next player
+        IF (current_player == x)
+            current_player = o
+        ELSE IF (current_player == o)
+            current_player = x
+        END IF
+    ENDIF
+
+END WHILE
