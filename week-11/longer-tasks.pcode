@@ -1,0 +1,2 @@
+int rings = INPUT("number of rings")
+OUTPUT("Starting with the largest ring, how many teeth are on the ring?")
