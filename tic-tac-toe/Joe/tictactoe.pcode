@@ -1,3 +1,5 @@
+// my psuedocode
+
 char board = [][] // 2d array board
 char current_player = x
 bool game_over = false

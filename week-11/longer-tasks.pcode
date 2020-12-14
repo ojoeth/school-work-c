@@ -1,2 +1,31 @@
-int rings = INPUT("number of rings")
+
+// Question 1
+
+int num_rings = 0
+int teeth[8]
+
+// input number of rings
+DO
+    num_rings = INPUT("number of rings")
+UNTIL (num_rings < 8 AND num_rings >= 0)
+
 OUTPUT("Starting with the largest ring, how many teeth are on the ring?")
+
+// populate with zeros
+FOR i = 0 TO i = 7
+    teeth[i] = 0
+NEXT i
+
+// populate with inputs (and validate inputs)
+FOR i = 0 TO i = (num_rings-1)
+    teeth[i] = INPUT("How many teeth on ring "+ i+1 + "?")
+    IF (i != 0 AND teeth[i] >= teeth[i-1])
+        OUTPUT("There are more teeth on this ring than the previous ring. This will not work. Please enter it again.")
+        i = i - 1
+    ENDIF
+NEXT i
+
+
+
+// Question 2
+
